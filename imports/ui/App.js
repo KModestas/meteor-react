@@ -56,7 +56,7 @@ class App extends Component {
 		return (
 			<div className='container'>
 				<header>
-					<h1>Todo List</h1>
+					<h1>Todo List ({this.props.incompleteCount})</h1>
 				</header>
 
 				<label className='hide-completed'>
@@ -82,5 +82,7 @@ class App extends Component {
 export default withTracker(() => {
 	return {
 		tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
+		// $ne selects the documents where the value of the field is not equal to the specified value . This includes documents that do not contain the field
+		incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
 	};
 })(App);
