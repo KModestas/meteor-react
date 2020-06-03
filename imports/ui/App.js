@@ -85,7 +85,7 @@ export default withTracker(() => {
 
 	return {
 		tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-		// $ne selects the documents where the value of the field is not equal to the specified value . This includes documents that do not contain the field
+		// $ne selects the documents where the value of the field is not equal to the specified value. This includes documents that do not contain the field
 		incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
 		currentUser: Meteor.user(),
 	};
